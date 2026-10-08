@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AxiomFlux Capital | Autonomous Quantitative Trading</title>
+  <style>
+    :root {
+      --bg-primary: #0a0c10;
+      --bg-secondary: #12161f;
+      --bg-card: rgba(18, 22, 31, 0.7);
+      --accent: #00e599;
+      --accent-glow: rgba(0, 229, 153, 0.15);
+      --accent-blue: #3b82f6;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 15% 20%, rgba(0, 229, 153, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 85% 80%, rgba(59, 130, 246, 0.05) 0%, transparent 40%);
+    }
+
+    /* Top Navigation */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 4rem;
+      border-bottom: 1px solid var(--border-color);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 12, 16, 0.85);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+
+    .brand-name {
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-name span {
+      color: var(--accent);
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    /* Hero Section */
+    .hero {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 6rem 2rem 4rem;
+      text-align: center;
+    }
+
+    .tagline-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .pulse-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+      max-width: 850px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    h1 .highlight {
+      background: linear-gradient(135deg, #ffffff 40%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-description {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 0 auto 3rem;
+    }
+
+    /* Key Metrics */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto 5rem;
+    }
+
+    .metric-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 1.75rem;
+      border-radius: 12px;
+      text-align: left;
+      backdrop-filter: blur(8px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .metric-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0.3;
+    }
+
+    .metric-value {
+      font-family: var(--font-mono);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 0.25rem;
+    }
+
+    .metric-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Architecture / Philosophy Section */
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+      text-align: center;
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 3.5rem;
+      font-size: 1rem;
+    }
+
+    .content-section {
+      max-width: 1100px;
+      margin: 0 auto 6rem;
+      padding: 0 2rem;
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .pillar-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 2.25rem;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .pillar-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0, 229, 153, 0.4);
+    }
+
+    .pillar-icon {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .pillar-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+      color: var(--text-main);
+    }
+
+    .pillar-card p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Small Team Edge Banner */
+    .compact-edge-box {
+      background: linear-gradient(180deg, rgba(18, 22, 31, 0.9) 0%, rgba(10, 12, 16, 0.95) 100%);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      margin-bottom: 6rem;
+    }
+
+    .compact-edge-box h3 {
+      font-size: 1.75rem;
+      line-height: 1.3;
+      margin-bottom: 1rem;
+    }
+
+    .compact-edge-box p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .terminal-window {
+      background: #050608;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.25rem;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: #64748b;
+    }
+
+    .terminal-row {
+      margin-bottom: 0.5rem;
+    }
+
+    .terminal-row span.green {
+      color: var(--accent);
+    }
+
+    .terminal-row span.white {
+      color: #e2e8f0;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 3rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      background: var(--bg-primary);
+    }
+
+    .footer-left {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .disclaimer {
+      font-size: 0.75rem;
+      color: #475569;
+      max-width: 500px;
+    }
+
+    @media (max-width: 900px) {
+      .metrics-grid, .pillars-grid, .compact-edge-box {
+        grid-template-columns: 1fr;
+      }
+      h1 {
+        font-size: 2.5rem;
+      }
+      header, footer {
+        padding: 1.5rem 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <a href="#" class="brand">
+      <!-- Embedded Vector Logo -->
+      <svg width="34" height="34" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="100" height="100" rx="20" fill="#12161f" stroke="rgba(255,255,255,0.1)" stroke-width="2"/>
+        <path d="M25 70L45 30L60 55L75 25" stroke="#00e599" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="25" cy="70" r="5" fill="#3b82f6"/>
+        <circle cx="45" cy="30" r="5" fill="#3b82f6"/>
+        <circle cx="60" cy="55" r="5" fill="#3b82f6"/>
+        <circle cx="75" cy="25" r="5" fill="#00e599"/>
+      </svg>
+      <div class="brand-name">Axiom<span>Flux</span></div>
+    </a>
+    <nav>
+      <a href="#technology">Technology</a>
+      <a href="#edge">The Edge</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <main>
+    <section class="hero">
+      <div class="tagline-badge">
+        <span class="pulse-dot"></span>
+        <span>DEPLOYING MODEL CLUSTERS ACROSS GLOBAL EXCHANGES</span>
+      </div>
+      <h1>
+        Autonomous Intelligence. <br>
+        <span class="highlight">Sub-Millisecond Liquidity.</span>
+      </h1>
+      <p class="hero-description">
+        AxiomFlux Capital is an ultra-boutique proprietary trading firm. We engineer autonomous reinforcement learning systems that capture intraday statistical inefficiencies across global equities and foreign exchange.
+      </p>
+
+      <!-- Key Performance Indicators -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-value">11</div>
+          <div class="metric-label">Researchers & Engineers</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-value">&lt; 14 &mu;s</div>
+          <div class="metric-label">Median Decision Latency</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-value">100%</div>
+          <div class="metric-label">Proprietary Capital</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-value">24 / 7</div>
+          <div class="metric-label">Autonomous Operation</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Core Technology Pillars -->
+    <section class="content-section" id="technology">
+      <h2 class="section-title">Algorithmic Architecture</h2>
+      <p class="section-subtitle">Bridging frontier deep learning research with bare-metal exchange co-location.</p>
+
+      <div class="pillars-grid">
+        <div class="pillar-card">
+          <div class="pillar-icon">[01] NEURAL_REGIMES</div>
+          <h3>Continuous Sentiment Ingestion</h3>
+          <p>
+            Large multimodal and specialized language models parse real-time global news, macroeconomic disclosures, and geopolitical statements to recalibrate risk curves prior to technical volatility spikes.
+          </p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon">[02] DETERMINISTIC_EXEC</div>
+          <h3>Bare-Metal FPGA Pipelines</h3>
+          <p>
+            Our order routers bypass conventional operating systems. Custom C++ and FPGA hardware parse market depth (L3 order books) in sub-microsecond intervals with deterministic execution guarantees.
+          </p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon">[03] ZERO_OVERNIGHT</div>
+          <h3>Strict Intraday Neutrality</h3>
+          <p>
+            Risk is strictly circumscribed. All directional exposure is flattened to base currency before market close, eliminating gap risk, borrowing drag, and tail-end geopolitical disruptions.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why 10 People? The Boutique Edge -->
+    <section class="content-section" id="edge">
+      <div class="compact-edge-box">
+        <div>
+          <h3>Why Boutique Scale is Our Greatest Advantage</h3>
+          <p>
+            Unlike institutional asset managers burdened by bureaucracy, sales departments, and client committees, AxiomFlux operates as a pure research laboratory.
+          </p>
+          <p>
+            With exactly 11 mathematicians, quantitative developers, and systems architects trading firm capital, hypothesis-to-production cycles take hours, not quarters.
+          </p>
+        </div>
+
+        <div class="terminal-window">
+          <div class="terminal-row">// AxiomFlux Production Monitor</div>
+          <div class="terminal-row"><span class="green">&gt;</span> REGIME_DETECTOR: <span class="white">ACTIVE (VOL_WINDOW: 150ms)</span></div>
+          <div class="terminal-row"><span class="green">&gt;</span> INFERENCE_ENGINE: <span class="white">LLM-QUANT-HYBRID v4.2</span></div>
+          <div class="terminal-row"><span class="green">&gt;</span> ACTIVE_NODES: <span class="white">TOKYO-TY3 / LONDON-LD4 / NY-NY4</span></div>
+          <div class="terminal-row"><span class="green">&gt;</span> DRAWDOWN_GUARD: <span class="white">ENGAGED (MAX_VAR: 0.40%)</span></div>
+          <div class="terminal-row"><span class="green">&gt;</span> STATUS: <span class="green">ALL ALGORITHMS RUNNING OPTIMAL</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <div class="footer-left">
+      <div class="brand-name">Axiom<span>Flux</span> Capital</div>
+      <div>Zurich &bull; London &bull; Tokyo</div>
+      <div class="disclaimer">
+        AxiomFlux Capital trades strictly proprietary capital and does not solicit, accept, or manage client or retail investments.
+      </div>
+    </div>
+    <div>
+      <p>Research Inquiries: <code>contact@axiomflux-capital.internal</code></p>
+      <p style="margin-top: 0.5rem; text-align: right;">&copy; 2026 AxiomFlux Capital AG</p>
+    </div>
+  </footer>
+
+</body>
+</html>
